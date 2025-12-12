@@ -1274,17 +1274,16 @@
         oklchSteps.appendChild(step);
       }
 
-      // Generate HSL steps (same numeric values, but perceptually uneven)
+      // Generate HSL steps (same lightness values, but perceptually uneven)
       hslSteps.innerHTML = '';
-      const hslHues = [60, 120, 180, 240, 300, 360, 30, 90]; // Different hues at same 50% lightness
-      hslHues.forEach((hue, i) => {
+      for (let l = 20; l <= 90; l += 10) {
         const step = document.createElement('div');
         step.className = 'color-step';
-        step.style.background = `hsl(${hue}, 80%, 50%)`;
-        step.style.color = (hue >= 40 && hue <= 180) ? 'hsl(0, 0%, 20%)' : 'hsl(0, 0%, 95%)';
-        step.textContent = `${hue}°`;
+        step.style.background = `hsl(145, 80%, ${l}%)`;
+        step.style.color = l > 55 ? 'hsl(145, 80%, 20%)' : 'hsl(145, 80%, 95%)';
+        step.textContent = `${l}%`;
         hslSteps.appendChild(step);
-      });
+      }
 
       // Set gradients
       oklchGradient.style.background = 'linear-gradient(in oklch to right, oklch(20% 0.2 145), oklch(90% 0.2 145))';
